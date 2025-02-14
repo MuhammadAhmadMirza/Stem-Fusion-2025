@@ -47,8 +47,8 @@ def substitution_cipher(input_file, key):
     for char in text:
         if char.isalpha():
             if char.isupper():
-                index = ord(char) - ord('A')
-                result += key[index]
+                index = ord(char) - ord('A') # the ord() returns the ASCII value of the character, -A will give the index of the character in the alphabet
+                result += key[index] # result will hold the decrypted text taken from the key
             else:
                 index = ord(char.upper()) - ord('A')
                 result += key[index].lower()
@@ -70,7 +70,9 @@ def vigenere_cipher(input_file, key):
     j = 0
     for char in text:
         if char.isalpha():
-            shift = ord(key[j % len(key)]) - ord('A')
+            # to determine the shift value, we subtract the ASCII value of the key character from 'A'
+            # j % len(key) ensures that we loop back to the beginning of the key if it is shorter than the text
+            shift = ord(key[j % len(key)]) - ord('A') 
             if char.isupper():
                 decrypted_char = chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
                 result += decrypted_char
@@ -99,6 +101,8 @@ def caesar_cipher(input_file, key):
     for char in text:
         if char.isalpha():
             if char.isupper():
+            # to get the result we subtract the ASCII value of 'A' from the ASCII value of the character and then subtract the shift value
+            # to get the new ASCII value of the character
                 result += chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
             else:
                 result += chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
@@ -120,7 +124,8 @@ def modulo_cipher(input_file, key):
     except ValueError:
         print("Key must be an integer for modulo cipher.")
         return
-    inv = None
+    # a modular inverse is a number 'inv' such that (key * inv) % 26 == 1
+    inv = None # will store the modular inverse of the key modulo 26
     for x in range(1, 26):
         if (a * x) % 26 == 1:
             inv = x
@@ -130,6 +135,7 @@ def modulo_cipher(input_file, key):
         return
     result = ""
     for char in text:
+        # to decrypt, we multiply the numeric value of the character by the modular inverse of the key modulo 26
         if char.isalpha():
             if char.isupper():
                 num = ord(char) - ord('A')
