@@ -1,7 +1,7 @@
 from ciphers.ciphers import *
 
-key = 0
+key = None
 text = ""
 output_file = None
 
-caesar_cipher(text, key)
+# put cipher function here

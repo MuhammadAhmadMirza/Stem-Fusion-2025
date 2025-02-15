@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+# Encrypting... or are we just making gibberish? 🤔
+
+# Shh... it's a secret! 🔐
+
+# Turning plain text into wizardry ✨
+
+# If you can read this, you cracked the code!
+
+# Nothing to see here... just some encrypted nonsense.
+
+# Even I forgot how this works. Good luck!
+
+# The art of hiding in plain sight.
+
+# Scrambling letters like a confused chef.
+
+# Decryption key? That’s above your clearance level.
+
+# Your secrets are safe... until someone finds the key.
+
+<html lang="en">
+<head>
+    # Encrypting... or are we just making gibberish? 🤔
+
+# Shh... it's a secret! 🔐
+
+# Turning plain text into wizardry ✨
+
+# If you can read this, you cracked the code!
+
+# Nothing to see here... just some encrypted nonsense.
+
+# Even I forgot how this works. Good luck!
+
+# The art of hiding in plain sight.
+
+# Scrambling letters like a confused chef.
+
+# Decryption key? That’s above your clearance level.
+
+# Your secrets are safe... until someone finds the key.
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turing Enigma</title>
+    # Encrypting... or are we just making gibberish? 🤔
+
+# Shh... it's a secret! 🔐
+
+# Turning plain text into wizardry ✨
+
+# If you can read this, you cracked the code!
+
+# Nothing to see here... just some encrypted nonsense.
+
+# Even I forgot how this works. Good luck!
+
+# The art of hiding in plain sight.
+
+# Scrambling letters like a confused chef.
+
+# Decryption key? That’s above your clearance level.
+
+# Your secrets are safe... until someone finds the key.
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #2d3a3f;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 15px;
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .question p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .input-box {
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 350px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #45a049;
+            box-shadow: 0 0 5px rgba(72, 182, 53, 0.7);
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 150px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .response {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d9534f;
+            display: none;
+        }
+        .correct-response {
+            color: #28a745;
+        }
+        .input-box .hint {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .response p {
+            margin: 0;
+        }
+        .loading {
+            color: #45a049;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Turing Enigma</h1>
+    
+    <div class="question">
+        <p>Step 1: Fill in the blank for the classic "Hello, World!" program in Python:</p>
+        <p><strong>print("_____")</strong></p>
+        <div class="input-box">
+            <input type="text" id="helloWorldAnswer" placeholder="Enter the answer" autocomplete="off">
+            <p class="hint">Hint: It's the first thing every programmer learns.</p>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>Step 2: Apply modulo 41 to the following numbers and map them to letters:</p>
+        <p>101,143,46, 95, 82, 88, 226, 101, 214, 56, 55</p>
+        <p><strong>What word do you uncover?</strong></p>
+        <div class="input-box">
+            <input type="text" id="moduloAnswer" placeholder="Enter the uncovered word" autocomplete="off">
+            <p class="hint">Hint: Think of a famous event.</p>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()">Submit</button>
+
+    <div class="loading" id="loadingMessage">Checking your answers...</div>
+    <div class="response" id="responseMessage"></div>
+
+    <script>
+        function checkAnswers() {
+            const helloWorldAnswer = document.getElementById("helloWorldAnswer").value.trim().toLowerCase();
+            const moduloAnswer = document.getElementById("moduloAnswer").value.trim().toUpperCase();
+            const loadingMessage = document.getElementById("loadingMessage");
+            const responseMessage = document.getElementById("responseMessage");
+
+            const correctHelloWorldAnswer = "hello, world!";
+            const correctModuloAnswer = "STEM FUSION";
+
+            // Show loading message
+            loadingMessage.style.display = 'block';
+            responseMessage.style.display = 'none';
+
+            // Simulate a slight delay for effect
+            setTimeout(() => {
+                loadingMessage.style.display = 'none';
+                let responseText = "";
+                let responseClass = "";
+# Encrypting... or are we just making gibberish? 🤔
+
+# Shh... it's a secret! 🔐
+
+# Turning plain text into wizardry ✨
+
+# If you can read this, you cracked the code!
+
+# Nothing to see here... just some encrypted nonsense.
+
+# Even I forgot how this works. Good luck!
+
+# The art of hiding in plain sight.
+
+# Scrambling letters like a confused chef.
+
+# Decryption key? That’s above your clearance level.
+
+# Your secrets are safe... until someone finds the key.
+
+                if (helloWorldAnswer === correctHelloWorldAnswer && moduloAnswer === correctModuloAnswer) {
+                # Encrypting... or are we just making gibberish? 🤔
+
+# Shh... it's a secret! 🔐
+
+# Turning plain text into wizardry ✨
+
+# If you can read this, you cracked the code!
+
+# Nothing to see here... just some encrypted nonsense.
+
+# Even I forgot how this works. Good luck!
+
+# The art of hiding in plain sight.
+
+# Scrambling letters like a confused chef.
+
+# Decryption key? That’s above your clearance level.
+
+# Your secrets are safe... until someone finds the key.
+
+                    responseText = "Correct! You have unlocked the password part: FUSION25";
+                    responseClass = "correct-response";
+                } else {
+                    responseText = "Incorrect answers. Please try again.";
+                    responseClass = "incorrect-response";
+                }
+
+                // Display the response
+                responseMessage.className = 'response ' + responseClass;
+                responseMessage.innerText = responseText;
+                responseMessage.style.display = 'block';
+            }, 2000); // simulate delay
+        }
+    </script>
+
+</body>
+</html>

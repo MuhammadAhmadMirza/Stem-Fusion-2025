@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptography Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #timer {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .question-container {
+            margin-top: 30px;
+        }
+        .question {
+            font-size: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .reveal {
+            font-size: 20px;
+            color: green;
+        }
+        .code-section {
+            margin-top: 20px;
+            font-size: 12px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer">Time Left: <span id="countdown">60</span> seconds</div>
+    
+    <div class="question-container">
+        <div class="question">
+            <p>1. Convert the binary number <strong>1011</strong> to decimal.</p>
+            <input type="number" id="binary-answer" placeholder="Enter answer" />
+            <button onclick="checkAnswer('binary')">Submit</button>
+        </div>
+        
+        <div class="question hidden" id="question2">
+            <p>2. Convert the binary number <strong>11001</strong> to decimal.</p>
+            <input type="number" id="binary-answer2" placeholder="Enter answer" />
+            <button onclick="checkAnswer('binary2')">Submit</button>
+        </div>
+
+        <div class="reveal hidden" id="reveal-message">
+            <p>Congratulations! You solved it! The answer is hidden somewhere inside this file.</p>
+        </div>
+    </div>
+
+    <div class="code-section hidden">
+        <p>Here’s some code hidden in the background for you to inspect:</p>
+        <pre>
+            <!-- password_hint:og -->
+            <code>
+                
+            </code>
+        </pre>
+    </div>
+
+    <script>
+        // Timer logic
+        let timer = 60;
+        const countdownElement = document.getElementById("countdown");
+
+        const countdownTimer = setInterval(function() {
+            if (timer > 0) {
+                timer--;
+                countdownElement.innerText = timer;
+            } else {
+                clearInterval(countdownTimer);
+                alert("Time's up! Try again.");
+            }
+        }, 1000);
+
+        // Check answers logic
+        function checkAnswer(question) {
+            if (question === 'binary') {
+                const answer = document.getElementById('binary-answer').value;
+                if (parseInt(answer) === 11) { // Binary 1011 is decimal 11
+                    document.getElementById('question2').classList.remove('hidden');
+                    document.getElementById('binary-answer').disabled = true;
+                    document.getElementById('binary-answer').style.backgroundColor = 'lightgray';
+                } else {
+                    alert("Incorrect answer! Try again.");
+                }
+            } else if (question === 'binary2') {
+                const answer = document.getElementById('binary-answer2').value;
+                if (parseInt(answer) === 25) { // Binary 11001 is decimal 25
+                    document.getElementById('reveal-message').classList.remove('hidden');
+                    document.querySelector('.code-section').classList.remove('hidden');
+                } else {
+                    alert("Incorrect answer! Try again.");
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

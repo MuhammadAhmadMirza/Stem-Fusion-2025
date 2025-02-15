@@ -1,0 +1,12 @@
+Welcome to TURINGS ENIGMA 
+
+
+You would need the following format if you want to win the module
+#######_######_########_####_####_#####
+
+For round 1 
+TO DO LIST:
+1. Submit the flag(something enclosed in {})
+2.Submit a separate document containing the deciphered plain text message for the locked file 
+
+NOTE:Submission is only acceptable on the required email 

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turing Enigma Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease, filter 0.3s ease;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        ol {
+            text-align: left;
+            font-size: 16px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2ecc71;
+        }
+
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Turing Enigma Challenge</h1>
+        <p>Solve the complex task below and unlock the password:</p>
+        
+        <div class="task">
+            <h3>Calculate the following:</h3>
+            <ol>
+                <li><strong>Sum the first terms</strong> from both arrays</li>
+                <li><strong>Multiply the second terms</strong> from both arrays</li>
+                <li><strong>Subtract the third terms</strong> from both arrays, then raise to the power of 2</li>
+                <li><strong>Divide the fourth terms</strong> from both arrays and add the fifth terms</li>
+            </ol>
+            <p>Array 1: [235, 876, 423, 128, 321]</p>
+            <p>Array 2: [567, 432, 786, 91, 123]</p>
+        </div>
+
+        <form id="task-form">
+            <label for="first-task">First Task (Sum the first terms):</label>
+            <input type="number" id="first-task" required>
+
+            <label for="second-task">Second Task (Multiply the second terms):</label>
+            <input type="number" id="second-task" required>
+
+            <label for="third-task">Third Task (Subtract the third terms, then raise to the power of 2):</label>
+            <input type="number" id="third-task" required>
+
+            <label for="fourth-task">Fourth Task (Divide the fourth terms and add the fifth terms):</label>
+            <input type="number" id="fourth-task" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        
+        <div id="result-message" class="hidden">
+            <p id="message"></p>
+            <p>If you answered correctly, the password is:</p>
+            <h2 id="password"></h2>
+        </div>
+
+        <div id="timer">Time Remaining: <span id="time-left">02:00</span></div>
+    </div>
+
+    <script>
+        // Timer Countdown
+        let timer = 120; // Time in seconds (2 minutes)
+        let interval = setInterval(function() {
+            let minutes = Math.floor(timer / 60);
+            let seconds = timer % 60;
+            document.getElementById('time-left').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            timer--;
+
+            // Reduce brightness as time runs out
+            if (timer <= 0) {
+                clearInterval(interval);
+            } else if (timer <= 30) {
+                document.body.style.filter = `brightness(${(timer / 30) * 0.5})`;
+            }
+
+        }, 1000);
+
+        // Task Form Submission
+        document.getElementById('task-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get user inputs
+            const firstTaskAnswer = parseInt(document.getElementById('first-task').value);
+            const secondTaskAnswer = parseInt(document.getElementById('second-task').value);
+            const thirdTaskAnswer = parseInt(document.getElementById('third-task').value);
+            const fourthTaskAnswer = parseInt(document.getElementById('fourth-task').value);
+
+            // Correct answers
+            const correctFirstAnswer = 802; // 235 + 567
+            const correctSecondAnswer = 377472; // 876 * 432
+            const correctThirdAnswer = 131401; // (423 - 786) ^ 2
+            const correctFourthAnswer = 2332; // (128 / 91) + 321
+
+            // Check if all answers are correct
+            if (firstTaskAnswer === correctFirstAnswer && secondTaskAnswer === correctSecondAnswer && thirdTaskAnswer === correctThirdAnswer && Math.abs(fourthTaskAnswer - correctFourthAnswer) < 0.01) {
+                // Display success message and password
+                document.getElementById('result-message').classList.remove('hidden');
+                document.getElementById('message').textContent = "Congratulations! You have completed the task successfully.";
+                document.getElementById('password').textContent = "GREAT";
+            } else {
+                // Incorrect answers, show message to retry
+                document.getElementById('message').textContent = "Oops! Some answers are incorrect. Please try again.";
+                document.getElementById('result-message').classList.remove('hidden');
+                document.getElementById('password').textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>

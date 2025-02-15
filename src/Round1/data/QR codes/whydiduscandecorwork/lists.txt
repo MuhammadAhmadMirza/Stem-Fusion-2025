@@ -1,0 +1,6 @@
+modulo 41 gives the remainder for any number divided by 41 
+we will map the remainder to the following :
+1=a
+2=b
+3=c and so on  
+open the python file and find the password hint 

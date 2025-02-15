@@ -30,6 +30,7 @@ def reverse_cipher(input_file):
     The key parameter is ignored for this cipher.
     """
     text = get_input_text(input_file)
+    # reverse per sentence
     result = text[::-1]
     output_result(result)
     
@@ -42,18 +43,27 @@ def substitution_cipher(input_file, key):
     based on its alphabetical position.
     """
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    # Validate key
+    if len(key) != 26 or not key.isalpha() or len(set(key.upper())) != 26:
+        raise ValueError("Key must be a 26-character unique uppercase letter mapping.")
+
+    key = key.upper()  # Ensure key is in uppercase for proper indexing
+
     text = get_input_text(input_file)
     result = ""
+
     for char in text:
         if char.isalpha():
             if char.isupper():
-                index = ord(char) - ord('A') # the ord() returns the ASCII value of the character, -A will give the index of the character in the alphabet
-                result += key[index] # result will hold the decrypted text taken from the key
+                index = alphabet.index(char)  # Get position in alphabet
+                result += key[index]  # Replace with mapped letter from key
             else:
-                index = ord(char.upper()) - ord('A')
-                result += key[index].lower()
+                index = alphabet.index(char.upper())  # Find index for uppercase
+                result += key[index].lower()  # Convert back to lowercase
         else:
-            result += char
+            result += char  # Preserve numbers and special characters
+
     output_result(result)
     
 def vigenere_cipher(input_file, key):
@@ -89,26 +99,24 @@ def caesar_cipher(input_file, key):
     Caesar Cipher Decryption:
     Reads text from the input_file and decrypts it using the Caesar cipher.
     The key must be an integer indicating the number of positions each letter was shifted.
-    Decryption is performed by shifting letters backward by the key value modulo 26.
+    Decryption is performed by shifting letters backward by the key.
     """
+    LETTERS = "abcdefghijklmnopqrstuvwxyz"
+    CAPITAL_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     text = get_input_text(input_file)
-    try:
-        shift = int(key)
-    except ValueError:
-        print("Key must be an integer for Caesar cipher.")
-        return
-    result = ""
+    output = ""
+    key = int(key)
+
     for char in text:
-        if char.isalpha():
-            if char.isupper():
-            # to get the result we subtract the ASCII value of 'A' from the ASCII value of the character and then subtract the shift value
-            # to get the new ASCII value of the character
-                result += chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
-            else:
-                result += chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
-        else:
-            result += char
-    output_result(result)
+        if char in LETTERS:  # small letter
+            output += LETTERS[(LETTERS.index(char) - key) % len(LETTERS)]
+        elif char in CAPITAL_LETTERS:  # capital letter
+            output += CAPITAL_LETTERS[(CAPITAL_LETTERS.index(char) - key) % len(CAPITAL_LETTERS)]
+        else:  # number or other special characters
+            pass
+            # output += char
+
+    return output_result(output)
     
 def modulo_cipher(input_file, key):
     """
@@ -147,7 +155,7 @@ def modulo_cipher(input_file, key):
             result += char
     output_result(result)
 
-def base64_decode(input_file, key):
+def base64_decode(input_file):
     """
     Base64 Decoding:
     Reads Base64-encoded text from the input_file and decodes it using the base64 module.
@@ -159,31 +167,4 @@ def base64_decode(input_file, key):
         result = decoded_bytes.decode('utf-8')
     except UnicodeDecodeError:
         result = decoded_bytes.decode('latin1')
-    output_result(result)
-    
-def rot_cipher(input_file, key=None):
-    """
-    ROT Cipher Decryption:
-    Reads text from the input_file and decrypts it using a rotation cipher.
-    If key is not provided, defaults to 13 (ROT13).
-    Decryption is performed by rotating letters backward by the key value modulo 26.
-    """
-    text = get_input_text(input_file)
-    if key is None:
-        shift = 13
-    else:
-        try:
-            shift = int(key)
-        except ValueError:
-            print("Key must be an integer for ROT cipher.")
-            return
-    result = ""
-    for char in text:
-        if char.isalpha():
-            if char.isupper():
-                result += chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
-            else:
-                result += chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
-        else:
-            result += char
     output_result(result)

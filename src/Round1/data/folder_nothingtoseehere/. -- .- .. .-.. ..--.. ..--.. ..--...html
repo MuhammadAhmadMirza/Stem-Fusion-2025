@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turing's Enigma - Cipher Challenge</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: black;
+            color: lime;
+            text-align: center;
+            padding: 30px;
+        }
+        h1 {
+            animation: flicker 1s infinite alternate;
+        }
+        @keyframes flicker {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+        .timer {
+            font-size: 2em;
+            color: red;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 15px;
+            border: 2px dashed lime;
+            margin: 15px;
+        }
+        .hidden-hint {
+            display: none;
+            color: cyan;
+            margin-top: 10px;
+        }
+        .hidden-message {
+            display: none;
+        }
+        input {
+            padding: 5px;
+            font-size: 1em;
+            background: black;
+            color: lime;
+            border: 1px solid lime;
+            text-align: center;
+        }
+        button {
+            background: lime;
+            color: black;
+            font-size: 1em;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔓 Turing's Enigma: Cipher Challenge 🔓</h1>
+    <p>Time is running out. Solve the ciphers before it’s too late! ⏳</p>
+    
+    <div class="timer">Time Left: <span id="countdown">2:00</span></div>
+
+    
+    <div class="question">
+        <h2>🕵️ Challenge 1: The Scrambled Code</h2>
+        <p><strong>Wklv lv wkh iluvw foxh.</strong></p>
+        <p><em>Hint: Something shifted... Can you figure it out?</em></p>
+        <input type="text" id="cipher1" placeholder="Enter answer">
+        <button onclick="checkAnswer(1)">Submit</button>
+        <p class="hidden-hint" id="hint1">✅ Correct! Move to the next challenge.</p>
+    </div>
+
+    
+    <div class="question">
+        <h2>📍 Challenge 2: The Hidden Coordinates</h2>
+        <p><strong>1 12 1 14 / 20 21 18 9 14 7</strong></p>
+        <p><em>Hint: Each number corresponds to a letter in the alphabet. What famous name do these numbers reveal?</em></p>
+        <input type="text" id="cipher2" placeholder="Enter answer">
+        <button onclick="checkAnswer(2)">Submit</button>
+        <p class="hidden-hint" id="hint2">✅ Great job! Keep going.</p>
+    </div>
+
+    <!-- Challenge 3: Morse Code Decoding -->
+    <div class="question">
+        <h2>🔦 Challenge 3: The Vanishing Text</h2>
+        <p><strong>-- -.-- ... - . .-. -.-- / .--. . .-. ... --- -. .- .-.. .. - -.-- / .. ... / - .... . / .-.. . -.. / - --- / - .-. ..- - ....</strong></p>
+        <p><em>Hint: Some mysteries are best solved one dot and dash at a time...</em></p>
+        <input type="text" id="cipher3" placeholder="Enter answer">
+        <button onclick="checkAnswer(3)">Submit</button>
+        <p class="hidden-hint" id="hint3">✅ Well done! You just deciphered Morse code! But the real answer lies elsewhere... 🤨</p>
+        <p class="hidden-hint" id="hint3">TRY TAKING A BREAK AND LOOK AROUND THE WONDERFUL DECOR THAT HAS BEEN DONE FOR U </p>
+    </div>
+
+    <p>🤨 Are you sure you’re looking in the right place? Maybe some answers **aren’t visible**... 🔍</p>
+    <p>I LOVED THE DECOR DONE FOR THE MODULE </p>
+
+    <!--  -->
+    <!-- password hint:"TISU" -->
+
+    <script>
+        let timeLeft = 120;
+        const timerDisplay = document.getElementById("countdown");
+
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            if (seconds < 10) seconds = "0" + seconds;
+            timerDisplay.textContent = `${minutes}:${seconds}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                timerDisplay.textContent = "💀 Time’s Up!";
+            }
+        }
+
+        updateTimer();
+
+        function checkAnswer(question) {
+            let answers = {
+                1: "this is the first clue",  // Caesar cipher (shift 3)
+                2: "alan turing",  // Numbers corresponding to "Alan Turing"
+                3: "mystery personality is the led to truth" // Morse translation
+            };
+
+            let input = document.getElementById(`cipher${question}`).value.toLowerCase().trim();
+            let hint = document.getElementById(`hint${question}`);
+
+            if (input === answers[question]) {
+                hint.style.display = "block";
+            } else {
+                alert("❌ Wrong answer. Try again!");
+            }
+        }
+    </script>
+
+</body>
+</html>
