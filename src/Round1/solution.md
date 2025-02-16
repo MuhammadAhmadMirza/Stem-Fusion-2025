@@ -16,13 +16,17 @@
 - **Password:**
 
   ```plaintext
-  TURINGS_EN4GMA_FUSION25_TISSUE_@btc_MODULE
+  TURINGS_EN4GMA_FUSION25_@BTC_TISU_GREAT_MODULE
   ```
 
 - **Instructions:**
 
   - Use the password to decompress the RAR file and obtain a PDF.
   - The PDF contains ciphertext colored white, making it look like the background in `./pdf cipher.txt`.
+
+WELCOME TO TURINGS ENIGMA I HOPE YOU HAVE FUN
+STARGNOC NO GNIREHPICED EHT TXET.FI UOY TNOD WONK TAHW OT OD TXEN
+ESAELP PEEK GNIYRT. EHT GALF ROF DNUO
 
 ### /data/QR codes/whydidyouscandecorework/
 
