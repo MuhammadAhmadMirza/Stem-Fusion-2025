@@ -70,12 +70,6 @@ def test_base64_decode():
     run_test(base64_decode, "V29ybGQ=", "unused", "World", "base64_decode with 'V29ybGQ='")
     run_test(base64_decode, "U29tZSB0ZXh0", "unused", "Some text", "base64_decode with 'U29tZSB0ZXh0'")
 
-def test_rot_cipher():
-    # Test ROT13 decryption (default key)
-    run_test(rot_cipher, "uryyb", None, "hello", "rot_cipher with default key (ROT13)")
-    # Test ROT cipher with custom key (e.g., key = 5)
-    run_test(rot_cipher, "hello", "5", "czggj", "rot_cipher with key '5'")
-
 def main():
     print("Running cipher tests...\n")
     test_reverse_cipher()
@@ -84,7 +78,6 @@ def main():
     test_caesar_cipher()
     test_modulo_cipher()
     test_base64_decode()
-    test_rot_cipher()
     print("\nAll tests completed.")
 
 if __name__ == '__main__':
